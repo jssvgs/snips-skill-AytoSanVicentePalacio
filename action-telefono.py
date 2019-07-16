@@ -154,7 +154,6 @@ if intentMessage.intent.intent_name == 'jvegas:Telefono':
         # telephone = root.find('Teléfono')
         telephone = "983 825 006"
         
-
         sentence = 'El número de teléfono del ayuntamiento es el ' + telephone
 
 
