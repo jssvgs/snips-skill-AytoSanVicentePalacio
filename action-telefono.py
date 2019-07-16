@@ -142,67 +142,21 @@ def intent_received(hermes, intentMessage):
 
 if intentMessage.intent.intent_name == 'jvegas:Telefono':
 
-        # try:
-        #     clima = intentMessage.slots.Clima.first().value
-        # except TypeError:
-        #     clima = 'tiempo'
-        #     pass
+        
+        # item = "Telefono"
 
-        # try:
-        #     municipio = intentMessage.slots.Municipio.first().value
-        # except TypeError:
-        #     municipio = defaultmunicipio
-        #     pass
+        
+        # url = select_url(item)
+        # response = requests.get(url)
+        # xml = response.text
+        # root = ET.fromstring(xml)
 
-        item = "Telefono"
-        # if intentMessage.slots.Fecha:
-        #     tmp = intentMessage.slots.Fecha[0].slot_value.value
-        #     fr_fecha = intentMessage.slots.Fecha[0].raw_value
-
-        # try:
-        #     if isinstance(tmp, hermes_python.ontology.dialogue.InstantTimeValue):
-        #         val = tmp.value[:-7]
-        #         diapred = val[0:10]
-        # except UnboundLocalError:
-        #     diapred = defaultfecha
-        #     fr_fecha = 'hoy'
-        #     pass
-
-        url = select_url(item)
-        response = requests.get(url)
-        xml = response.text
-        root = ET.fromstring(xml)
-
-        telephone = root.find('Teléfono')
-        # for dia in prediccion.iter('dia'):
-        #     if dia.get('fecha') == diapred:
-        #         hoy = dia
-        #         break
-
-        # pc = pred_cielo(hoy)
-        # pt = pred_temperatura(hoy)
-        # ph = pred_humedad(hoy)
-        # pl = pred_lluvia(hoy)
-        # pn = pred_nieve(hoy)
-        # pv = pred_viento(hoy)
-
+        # telephone = root.find('Teléfono')
+        telephone = "983 825 006"
+        
 
         sentence = 'El número de teléfono del ayuntamiento es el ' + telephone
 
-        # if clima == 'cielo':
-        #     sentence +=  pc
-        # if clima == 'temperatura':
-        #     sentence +=  pt
-        # if clima == 'humedad':
-        #     sentence +=  ph
-        # if clima == 'lluvia':
-        #     sentence +=  pl + pn
-        # if clima == 'nieve':
-        #     sentence +=  pn
-        # if clima == 'viento':
-        #     sentence +=  pv
-        # if clima == 'tiempo':
-        #     sentence +=  pc + pt + pl + pn + ph + pv
 
     else:
         return
