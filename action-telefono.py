@@ -140,7 +140,7 @@ def select_url(current_item):
 
 def intent_received(hermes, intentMessage):
 
-if intentMessage.intent.intent_name == 'jvegas:Telefono':
+if intentMessage.intent.intent_name == 'jvegas:telefono':
 
         
         # item = "Telefono"
