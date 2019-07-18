@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
+# añadir tantos pares item, url como sea necesarias
+#   item = elemento a buscar
+#   url  = ulr donde encontrar la información
 
-nombre_item = list()
-url_item = list()
+urls_dict = {}
 
-nombre_item.append("Telefono")
-url_item.append("https://sanvicentedelpalacio.ayuntamientosdevalladolid.es/contacto")
+urls_dict["contacto"]="https://sanvicentedelpalacio.ayuntamientosdevalladolid.es/contacto"

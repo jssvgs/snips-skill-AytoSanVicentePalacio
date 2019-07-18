@@ -26,19 +26,30 @@ def select_url(current_item):
 
 
 
+def intent_received(hermes, intentMessage):
 
-
-
-item = "Telefono"
+if intentMessage.intent.intent_name == 'jvegas:telefono':
 
         
-url = select_url(item)
-response = requests.get(url)
-xml = response.text
-root = ET.fromstring(xml)
+        # item = "Telefono"
 
-telephone = root.find('Teléfono')
         
-sentence = 'El número de teléfono del ayuntamiento es el ' + telephone
+        # url = select_url(item)
+        # response = requests.get(url)
+        # xml = response.text
+        # root = ET.fromstring(xml)
 
-print(response)
+        # telephone = root.find('Teléfono')
+        telephone = "983 825 006"
+        
+        sentence = 'El número de teléfono del ayuntamiento es el ' + telephone
+
+
+    else:
+        return
+    
+    hermes.publish_end_session(intentMessage.session_id, sentence)
+    
+    
+with Hermes(MQTT_ADDR) as h:
+    h.subscribe_intents(intent_received).start()
