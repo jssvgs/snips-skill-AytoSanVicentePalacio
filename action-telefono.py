@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 from hermes_python.hermes import Hermes
 import hermes_python 
-import requests
-from urls_ayto import nombre_item, url_item
-from xml.etree import ElementTree as ET
+from urls_ayto import urls_dict
 import json
 
 cache_file = "cache.json"   # sets the name of the cache file
