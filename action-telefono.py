@@ -4,44 +4,29 @@ import hermes_python
 import requests
 from urls_ayto import nombre_item, url_item
 from xml.etree import ElementTree as ET
-# from datetime import datetime, date, time, timedelta
-# import calendar
+import json
 
-MQTT_IP_ADDR = "localhost" 
+cache_file = "cache.json"   # sets the name of the cache file
+
+MQTT_IP_ADDR = "localhost"
 MQTT_PORT = 1883 
 MQTT_ADDR = "{}:{}".format(MQTT_IP_ADDR, str(MQTT_PORT)) 
 
-# a = datetime.now()
-# f = a.date()
-# defaultfecha = str(f)
+
+# open the cache file and read the json
+with open (cache_file, "r") as read_file:
+    cache = json.load(read_file))
 
 
-def select_url(current_item):
-    for x in nombre_item:
-        if x == current_item:
-            break
-    idxm = nombre_item.index(x)
-    urlm = url_item[idxm]
-    return urlm
-
-
+        # print(type(data))
+        # print(">>>", data)
+        # print("telefono: ", data["telephone"])
 
 def intent_received(hermes, intentMessage):
 
 if intentMessage.intent.intent_name == 'jvegas:telefono':
 
-        
-        # item = "Telefono"
-
-        
-        # url = select_url(item)
-        # response = requests.get(url)
-        # xml = response.text
-        # root = ET.fromstring(xml)
-
-        # telephone = root.find('Teléfono')
-        telephone = "983 825 006"
-        
+        telephone = cache["telephone"]
         sentence = 'El número de teléfono del ayuntamiento es el ' + telephone
 
 

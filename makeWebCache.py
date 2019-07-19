@@ -1,69 +1,44 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
-# from hermes_python.hermes import Hermes
-# import hermes_python 
 import requests
 from bs4 import BeautifulSoup #pip3 install beautifulsoup4
-
 from urls_ayto import urls_dict
-from xml.etree import ElementTree 
 import json
+from datetime import datetime
 
-from datetime import datetime, date, time, timedelta
-# import calendar
+cache_file = "cache.json"   # sets the name of the cache file
 
-# MQTT_IP_ADDR = "localhost" 
-# MQTT_PORT = 1883 
-# MQTT_ADDR = "{}:{}".format(MQTT_IP_ADDR, str(MQTT_PORT)) 
+### obtain the html content
 
+item = "contacto"           # indicate the item to retrieve from the web page 
+url = urls_dict[item]       # search the url from the dict
+response = requests.get(url)    # make a get http request    
+# print(">>>> ",response.status_code)       # the status can be handled, in case of error
+text_response = response.text   # obtaint the html response 
+soup = BeautifulSoup(text_response, 'html.parser')      # parse the response as HTML code
+# print(soup.prettify()) 
 
+### extract the data from the web page and store it in the cache struct
+cache = {}  #initialize the cache struct as a dictionary
+cache["cache_datetime"] = str(datetime.now())   # set the date of the cache data
+cache["address"]= soup.find("div", "address").text.strip()  # no whitespaces 
+cache["telephone"] = soup.find("div", "phone local").text[5:]   # without " +34 "
+cache["fax"] = soup.find("div", "phone fax").text[5:]   # without " +34 "
+cache["email"] = soup.find("div", "email").text.strip()
+cache["URL"] = soup.find("div", "urlExterna").text.strip()
 
-def select_url(current_item):
-    for x in nombre_item:
-        if x == current_item:
-            break
-    idxm = nombre_item.index(x)
-    urlm = url_item[idxm]
-    print(">>>>", urlm)
-    return urlm
+# print("CACHE dict >>>", cache)
 
+### save the cache dict on file as a json
+with open (cache_file, "w") as write_file:
+    json.dump(cache, write_file)
 
-item = "contacto"
-        
-#        url = lista_urls["contacto"]
+# print("grabado json en file")
 
-url = urls_dict[item]
-response = requests.get(url)
-print(">>>> ",response.status_code)
-text_response = response.text
-soup = BeautifulSoup(text_response, 'html.parser')
-print("==========================================================")
-print(soup.prettify())
-print("==========================================================")
+# with open ("cache.json", "r") as read_file:
+#     data = json.load(read_file)
 
-# for tag in print(soup.find_all(re.compile("phones"))):
-#     print(tag)
-
-cache = {}
-cache["cache_datetime"] = str(datetime.now())
-cache["address"]= soup.find("div", "address").text
-cache["telephone"] = soup.find("div", "phone local").text
-cache["fax"] = soup.find("div", "phone fax").text
-cache["email"] = soup.find("div", "email").text
-cache["URL"] = soup.find("div", "urlExterna").text
-
-print("CACHE dict >>>", cache)
-
-json_cache = json.dumps(cache)
-print("CACHE json >>>", json_cache)
-
-with open ("cache.json", "w") as write_file:
-    json.dump(json_cache, write_file)
-
-print("grabado json en file")
-
-with open ("cache.json", "r") as read_file:
-    data = json.load(read_file)
-
-print("leido json >>>", data)
+# print(type(data))
+# print(">>>", data)
+# print("telefono: ", data["telephone"])
