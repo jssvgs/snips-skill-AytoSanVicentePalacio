@@ -18,9 +18,8 @@ with open (cache_file, "r") as read_file:
     cache = json.load(read_file))
 
 
-        # print(type(data))
-        # print(">>>", data)
-        # print("telefono: ", data["telephone"])
+print(">>>", data)
+print("telefono: ", data["telephone"])
 
 def intent_received(hermes, intentMessage):
 
