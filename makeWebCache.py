@@ -23,8 +23,10 @@ soup = BeautifulSoup(text_response, 'html.parser')      # parse the response as 
 cache = {}  #initialize the cache struct as a dictionary
 cache["cache_datetime"] = str(datetime.now())   # set the date of the cache data
 cache["address"]= soup.find("div", "address").text.strip()  # no whitespaces 
-cache["telephone"] = soup.find("div", "phone local").text[5:]   # without " +34 "
-cache["fax"] = soup.find("div", "phone fax").text[5:]   # without " +34 "
+the_telephone_number= soup.find("div", "phone local").text[5:]   # without " +34 "
+cache["telephone"] = the_telephone_number.replace(" ",", ",2) # prepare to better speak
+the_fax_number = soup.find("div", "phone fax").text[5:]   # without " +34 "
+cache["fax"] = the_fax_number.replace(" ",", ",2)
 cache["email"] = soup.find("div", "email").text.strip()
 cache["URL"] = soup.find("div", "urlExterna").text.strip()
 
