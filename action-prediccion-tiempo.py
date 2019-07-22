@@ -140,7 +140,7 @@ def pred_viento(hoy):
 
 def intent_received(hermes, intentMessage):
 
-    if intentMessage.intent.intent_name == 'jaimevegas:DiTiempo':
+    if intentMessage.intent.intent_name == 'jvegas:elTiempo':
 
         try:
             clima = intentMessage.slots.Clima.first().value

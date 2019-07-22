@@ -21,7 +21,7 @@ print("telefono: ", cache["telephone"])
 
 def intent_received(hermes, intentMessage):
 
-    if intentMessage.intent.intent_name == 'telefono':
+    if intentMessage.intent.intent_name == 'jvegas:telefono':
 
         print(teléfono)
         telephone = cache["telephone"]
