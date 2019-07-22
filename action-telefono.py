@@ -16,12 +16,12 @@ with open (cache_file, "r") as read_file:
     cache = json.load(read_file)
 
 
-print(">>>", data)
-print("telefono: ", data["telephone"])
+print(">>>", cache)
+print("telefono: ", cache["telephone"])
 
 def intent_received(hermes, intentMessage):
 
-    if intentMessage.intent.intent_name == 'jvegas:telefono':
+    if intentMessage.intent.intent_name == 'telefono':
 
         print(teléfono)
         telephone = cache["telephone"]
