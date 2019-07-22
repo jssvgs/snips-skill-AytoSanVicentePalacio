@@ -15,7 +15,6 @@ MQTT_ADDR = "{}:{}".format(MQTT_IP_ADDR, str(MQTT_PORT))
 with open (cache_file, "r") as read_file:
     cache = json.load(read_file)
 
-
 print(">>>", cache)
 print("telefono: ", cache["telephone"])
 
